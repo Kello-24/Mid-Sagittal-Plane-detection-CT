@@ -30,10 +30,10 @@ def ct_filename_permuted_search(ct_name_input, ct_name_data):
     
     # Prepare patterns dynamically with the actual values of day, month, and year
     patterns = [
-        rf"im[-_. ]?ct[-_. ]?(?:0)?{day}[-_. ]?(?:0)?{month}[-_. ]?{year}",
-        rf"im[-_. ]?ct[-_. ]?(?:0)?{year}[-_. ]?(?:0)?{month}[-_. ]?(?:0)?{day}",
-        rf"ct[-_. ]?(?:0)?{day}[-_. ]?(?:0)?{month}[-_. ]?{year}",
-        rf"ct[-_. ]?(?:0)?{year}[-_. ]?(?:0)?{month}[-_. ]?(?:0)?{day}"
+        rf"(?:0)?{day}[-_. ]?(?:0)?{month}[-_. ]?{year}",
+        rf"(?:0)?{year}[-_. ]?(?:0)?{month}[-_. ]?(?:0)?{day}",
+        rf"(?:0)?{day}[-_. ]?(?:0)?{month}[-_. ]?{year}",
+        rf"(?:0)?{year}[-_. ]?(?:0)?{month}[-_. ]?(?:0)?{day}"
     ]
     
     # Convert the CT name from the dataset to lowercase for case-insensitive comparison
@@ -111,7 +111,8 @@ for index, row in df.iterrows():
     
     try:
         patient = app.OpenPatientById(pat_id)
-        # print(f"Processing Patient ID: {pat_id}")
+        
+        print(f"Processing Patient ID: {pat_id}")
 
         found_structures = []  # List to keep track of found structures for this patient
         for pat_course in patient.Courses:
@@ -128,13 +129,15 @@ for index, row in df.iterrows():
                 # -> SEE ct_filename_permuted_search()
 
                 if ct_filename_permuted_search(row['IM_ID'], image.Id):
-                    pat_folder_path = os.path.join(save_path, pat_id)
+                    pat_folder_path = os.path.join(save_path, pat_id) # Only create one folder for the patient
+                    course_path = os.path.join(pat_folder_path, pat_course_plan) # Only create one folder for the course
 
                     os.makedirs(pat_folder_path, exist_ok=True)
+                    os.makedirs(course_path, exist_ok=True)
 
                     # Process the image (assumes img is defined)
-                    sitk.WriteImage(img, os.path.join(pat_folder_path, 'image.nii.gz'))
-                    # print('Image Saved')
+                    sitk.WriteImage(img, os.path.join(course_path, 'image.nii.gz'))
+                    print('Image Saved')
 
                     # Process structures
                     for structure in plan.StructureSet.Structures:
@@ -164,7 +167,7 @@ for index, row in df.iterrows():
                             img.SetOrigin(np.array(origin_vec))
                             img.SetSpacing(np.array(spacing))
                             img.SetDirection(dir_vec)
-                            sitk.WriteImage(img, os.path.join(pat_folder_path, f'mask_{structure.Id}.nii.gz'))
+                            sitk.WriteImage(img, os.path.join(course_path, f'mask_{structure.Id}.nii.gz'))
                             # print(f"Mask saved for structure {structure.Id}")
 
                 else:
