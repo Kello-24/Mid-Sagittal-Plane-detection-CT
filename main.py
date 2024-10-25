@@ -53,7 +53,7 @@ def ct_filename_permuted_search(ct_name_input, ct_name_data):
 
 
 def create_mask_from_contours(shape, contours):
-    # Create a grid of points
+    # Create a grid of points asdf
     x, y = np.meshgrid(np.arange(shape[1]), np.arange(shape[0]))
     points = np.vstack((x.flatten(), y.flatten())).T
 
