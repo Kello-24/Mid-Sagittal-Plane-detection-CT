@@ -87,7 +87,8 @@ structure_patterns = [
     r'spinal[-_ ]?cord',  # Matches 'SpinalCord', 'spinal-cord', 'spinal cord', and 'spinal_cord'
     r'mandible',  # Matches 'mandible'
     r'mandibula',  # Matches 'mandibula'
-    r'gtv[-_ ]?(p|pt|1)?'  # Matches 'gtvp', 'gtv pt', 'gtv_pt', 'gtv1', 'gtv-p', 'gtv-pt', etc.
+    r'gtv',  # Matches 'gtv'
+    # r'gtv[-_ ]?(p|pt|1)?'  # Matches 'gtvp', 'gtv pt', 'gtv_pt', 'gtv1', 'gtv-p', 'gtv-pt', etc.
 ]
 # Define number of structures to find
 num_structures = 3
