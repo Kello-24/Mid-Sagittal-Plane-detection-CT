@@ -1,0 +1,9 @@
+joblib
+nibabel
+matplotlib
+numpy
+scipy
+pandas
+ipywidgets
+scikit-image
+seaborn
