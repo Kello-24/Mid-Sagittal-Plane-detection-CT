@@ -168,7 +168,7 @@ The objective is the mean Huber loss over all valid pairs, optimised via BFGS.
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+For Freeeeeeeeeee
 
 ---
 
