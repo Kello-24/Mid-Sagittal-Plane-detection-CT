@@ -1,9 +1,10 @@
-joblib
-nibabel
-matplotlib
 numpy
+matplotlib
 scipy
+nibabel
+joblib
 pandas
-ipywidgets
-scikit-image
 seaborn
+scikit-image
+ipywidgets
+imageio
