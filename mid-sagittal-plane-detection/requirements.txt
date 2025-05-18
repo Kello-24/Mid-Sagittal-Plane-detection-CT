@@ -1,0 +1,9 @@
+numpy==1.23.5
+pandas==1.5.3
+matplotlib==3.6.2
+imageio==2.19.3
+nibabel==5.0.1
+scipy==1.9.3
+joblib==1.2.0
+ipywidgets==7.6.5
+```
